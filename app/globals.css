@@ -2,20 +2,34 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    padding-bottom: 0.2em;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  body {
+    @apply bg-gray-100;
+  }
+}
+
+.benefit-card {
+  transition: background 0.3s ease;
+}
+
+.benefit-card:hover {
+  background: linear-gradient(135deg, #65a9f0, #d552d8, #f896ab);
+}
+
+.benefit-card:hover h3,
+.benefit-card:hover p {
+  color: white;
+}
+
+.benefit-card:hover svg {
+  color: white;
 }
