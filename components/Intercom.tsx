@@ -1,76 +1,21 @@
-'use client'
+'use client';
 
 import { useEffect } from 'react';
 
 declare global {
   interface Window {
     Intercom: any;
-    intercomSettings: any;
-    attachEvent?: (event: string, listener: () => void) => void;
   }
 }
 
-type IntercomFunction = {
-  c: (args: IArguments) => void;
-  q: any[];
-} & {
-  (command: string, ...args: any[]): void;
-};
-
-export default function IntercomChat() {
+export function IntercomChat() {
   useEffect(() => {
-    if (typeof window === 'undefined') return;
-
-    window.intercomSettings = {
-      api_base: "https://api-iam.intercom.io",
-      app_id: "l003qwre"
-    };
-
-    // Load Intercom
-    (function() {
-      const w = window;
-      const ic = w.Intercom;
-      if (typeof ic === "function") {
-        ic('reattach_activator');
-        ic('update', w.intercomSettings);
-      } else {
-        const d = document;
-        const i = function(this: IntercomFunction) {
-          i.c(arguments);
-        } as unknown as IntercomFunction;
-        i.q = [];
-        i.c = function(args) {
-          i.q.push(args);
-        };
-        w.Intercom = i;
-
-        const l = function() {
-          const s = d.createElement('script');
-          s.type = 'text/javascript';
-          s.async = true;
-          s.src = 'https://widget.intercom.io/widget/l003qwre';
-          const x = d.getElementsByTagName('script')[0];
-          x?.parentNode?.insertBefore(s, x);
-        };
-
-        if (document.readyState === 'complete') {
-          l();
-        } else if (w.attachEvent) {
-          w.attachEvent('onload', l);
-        } else {
-          w.addEventListener('load', l, false);
-        }
-      }
-    })();
-
-    // Cleanup
-    return () => {
-      if (window.Intercom) {
-        window.Intercom('shutdown');
-        delete window.Intercom;
-      }
-    };
+    if (typeof window !== 'undefined') {
+      (function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',w.intercomSettings);}else{var d=document;var i=function(){i.c(arguments);};i.q=[];i.c=function(args){i.q.push(args);};w.Intercom=i;var l=function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/l003qwre';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);};if(document.readyState==='complete'){l();}else if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();
+    }
   }, []);
 
   return null;
 }
+
+export default IntercomChat;

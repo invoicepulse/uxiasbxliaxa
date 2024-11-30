@@ -5,6 +5,7 @@ import "@/app/globals.css"
 import { AutoScrollToTop } from "@/components/auto-scroll-to-top"
 import { Metadata } from "next"
 import { IntercomProvider } from "@/components/IntercomProvider"
+import IntercomWrapper from "@/components/IntercomWrapper"
 
 const inter = Inter({ subsets: ["latin"] })
 const plusJakarta = Plus_Jakarta_Sans({ 
@@ -58,6 +59,7 @@ export default function RootLayout({
         </div>
         <AutoScrollToTop />
         <IntercomProvider />
+        <IntercomWrapper />
       </body>
     </html>
   )
