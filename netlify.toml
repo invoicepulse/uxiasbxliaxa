@@ -1,6 +1,6 @@
 [build]
-  command = "npm install --legacy-peer-deps && npm run build"
-  publish = ".next"
+  command = "npm install --legacy-peer-deps && npm run build:netlify"
+  publish = "out"
 
 [build.environment]
   NEXT_USE_NETLIFY_EDGE = "true"
