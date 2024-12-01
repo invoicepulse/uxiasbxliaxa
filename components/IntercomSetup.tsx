@@ -9,12 +9,8 @@ declare global {
       api_base: string;
       app_id: string;
     };
+    attachEvent?: (event: string, listener: () => void) => void;
   }
-}
-
-interface IntercomFunction extends Function {
-  c?: (args: any) => void;
-  q?: any[];
 }
 
 export default function IntercomSetup() {
@@ -26,43 +22,20 @@ export default function IntercomSetup() {
       app_id: "l003qwre"
     };
 
-    (function() {
-      var w = window;
-      var ic = w.Intercom;
-      if (typeof ic === "function") {
-        ic('reattach_activator');
-        ic('update', w.intercomSettings);
-      } else {
-        var d = document;
-        var i: IntercomFunction = function() {
-          if (i.c) i.c(arguments);
-        };
-        i.q = [];
-        i.c = function(args) {
-          i.q!.push(args);
-        };
-        w.Intercom = i;
+    const initIntercom = () => {
+      const script = document.createElement('script');
+      script.async = true;
+      script.src = 'https://widget.intercom.io/widget/l003qwre';
+      document.body.appendChild(script);
+    };
 
-        function l() {
-          var s = d.createElement('script');
-          s.type = 'text/javascript';
-          s.async = true;
-          s.src = 'https://widget.intercom.io/widget/l003qwre';
-          var x = d.getElementsByTagName('script')[0];
-          if (x && x.parentNode) {
-            x.parentNode.insertBefore(s, x);
-          }
-        }
-
-        if (document.readyState === 'complete') {
-          l();
-        } else if (w.attachEvent) {
-          w.attachEvent('onload', l);
-        } else {
-          w.addEventListener('load', l, false);
-        }
-      }
-    })();
+    if (document.readyState === 'complete') {
+      initIntercom();
+    } else if (window.attachEvent) {
+      window.attachEvent('onload', initIntercom);
+    } else {
+      window.addEventListener('load', initIntercom, false);
+    }
 
     return () => {
       if (window.Intercom) {

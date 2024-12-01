@@ -4,7 +4,6 @@ import { Inter, Plus_Jakarta_Sans } from "next/font/google"
 import "@/app/globals.css"
 import { AutoScrollToTop } from "@/components/auto-scroll-to-top"
 import { Metadata } from "next"
-import { IntercomProvider } from "@/components/IntercomProvider"
 import IntercomWrapper from "@/components/IntercomWrapper"
 
 const inter = Inter({ subsets: ["latin"] })
@@ -58,7 +57,6 @@ export default function RootLayout({
           <Footer />
         </div>
         <AutoScrollToTop />
-        <IntercomProvider />
         <IntercomWrapper />
       </body>
     </html>

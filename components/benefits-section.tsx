@@ -86,3 +86,4 @@ export function BenefitsSection() {
   )
 }
 
+export default BenefitsSection

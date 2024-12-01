@@ -70,3 +70,4 @@ export function AdditionalFeatures() {
   )
 }
 
+export default AdditionalFeatures

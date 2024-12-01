@@ -51,3 +51,5 @@ export function SubscriptionSection() {
     </section>
   )
 }
+
+export default SubscriptionSection
